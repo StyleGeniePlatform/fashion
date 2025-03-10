@@ -1,0 +1,31 @@
+version: '3.8'
+services:
+  app:
+    build: .
+    container_name: fashion
+    ports:
+      - "8080:8080"
+    depends_on:
+      - db
+    environment:
+      SPRING_DATASOURCE_URL: jdbc:mysql://database-investment.cn88ie2ekh9s.ap-northeast-2.rds.amazonaws.com:3307/investment
+      SPRING_DATASOURCE_USERNAME: admin
+      SPRING_DATASOURCE_PASSWORD: sosow0212
+    networks:
+      - my-network
+
+  db:
+    image: mysql:8.0
+    container_name: my-mysql
+    restart: always
+    environment:
+      MYSQL_DATABASE: mydb
+      MYSQL_ROOT_PASSWORD: root
+    ports:
+      - "3307:3306"
+    networks:
+      - my-network
+
+networks:
+  my-network:
+    driver: bridge
