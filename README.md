@@ -8,3 +8,29 @@ mvp -> 로그인과 배포 -> 커뮤니티 -> 옷렌탈 -> 브랜드들 모아�
 - 사진올리기
 - 채팅
 - 좋아요
+
+
+--- 
+service
+- community
+- brands
+- rental
+- stores
+
+
+
+---
+profile
+- login 
+- join us 
+- my page
+
+
+---
+about 
+
+
+--- 
+- Q&A
+- notice
+- contact
