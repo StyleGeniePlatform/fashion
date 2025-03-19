@@ -5,6 +5,5 @@ public record SignUpRequest(
         String memberName,
         String memberPassword,
         String memberNickName
-
 ) {
 }
