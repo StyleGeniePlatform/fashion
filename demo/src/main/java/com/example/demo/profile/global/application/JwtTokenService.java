@@ -4,7 +4,9 @@ import com.auth0.jwt.exceptions.TokenExpiredException;
 import com.auth0.jwt.interfaces.DecodedJWT;
 import java.util.Optional;
 
+import com.example.demo.profile.global.exception.exceptions.jwt.NotFoundTokenException;
 import com.example.demo.profile.global.exception.exceptions.jwt.TokenTimeException;
+import com.example.demo.profile.member.infrastructure.auth.JwtTokenProvider;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 

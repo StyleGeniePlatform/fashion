@@ -1,6 +1,9 @@
 package com.example.demo.profile.global.resolver;
 
+
+import com.example.demo.profile.global.annotation.Member;
 import com.example.demo.profile.global.application.JwtTokenService;
+import com.example.demo.profile.global.exception.exceptions.jwt.NotFoundTokenException;
 import jakarta.servlet.http.HttpServletRequest;
 import java.util.Optional;
 import lombok.RequiredArgsConstructor;
@@ -10,7 +13,6 @@ import org.springframework.web.bind.support.WebDataBinderFactory;
 import org.springframework.web.context.request.NativeWebRequest;
 import org.springframework.web.method.support.HandlerMethodArgumentResolver;
 import org.springframework.web.method.support.ModelAndViewContainer;
-
 
 @Component
 @RequiredArgsConstructor
