@@ -24,12 +24,9 @@ dependencies {
 	implementation 'org.springframework.boot:spring-boot-starter-thymeleaf'
 	implementation 'org.springframework.boot:spring-boot-starter-validation'
 	implementation 'org.springframework.boot:spring-boot-starter-web'
-
 	compileOnly 'org.projectlombok:lombok:1.18.30'
 	annotationProcessor 'org.projectlombok:lombok:1.18.30'
 	developmentOnly 'org.springframework.boot:spring-boot-devtools'
-
-
 	runtimeOnly 'com.h2database:h2'
 	runtimeOnly 'com.mysql:mysql-connector-j'
 	testImplementation 'org.springframework.boot:spring-boot-starter-test'
@@ -43,9 +40,8 @@ dependencies {
 	// jwt
 	implementation 'com.auth0:java-jwt:4.2.1'
 
-	// Oauth2
-	implementation "org.springframework.boot:spring-boot-starter-oauth2-client"
 }
+
 
 tasks.named('test') {
 	useJUnitPlatform()
