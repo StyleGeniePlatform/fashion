@@ -1,6 +1,5 @@
 package com.example.demo.profile.global.annotation;
 
-
 import java.lang.annotation.ElementType;
 import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
