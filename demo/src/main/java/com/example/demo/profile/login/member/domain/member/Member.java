@@ -13,7 +13,7 @@ import lombok.NoArgsConstructor;
 import java.util.Objects;
 
 
-@Entity(name="member")
+@Entity(name = "member")
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 @Getter
 public class Member {
@@ -34,6 +34,14 @@ public class Member {
     @Column(nullable = false)
     private String memberNickName;
 
+    @Column(nullable = false)
+    private String height;
+
+    @Column(nullable = false)
+    private String weight;
+
+    @Column(nullable = false)
+    private String shoeSize;
 
     public Member(final String memberEmail, final String memberName, final String memberPassword, final String memberNickName) {
         this.memberEmail = memberEmail;
