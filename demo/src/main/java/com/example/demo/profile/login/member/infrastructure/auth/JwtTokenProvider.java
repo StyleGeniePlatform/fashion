@@ -31,6 +31,7 @@ public class JwtTokenProvider implements Token {
                 .withExpiresAt(new Date(System.currentTimeMillis() + expirationPeriod * 1000L))
                 .withJWTId(UUID.randomUUID().toString())
                 .sign(algorithm);
+
     }
 
     @Override

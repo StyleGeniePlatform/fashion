@@ -4,6 +4,9 @@ public record SignUpRequest(
         String memberEmail,
         String memberName,
         String memberPassword,
-        String memberNickName
+        String memberNickName,
+        String height,
+        String weight,
+        String showSize
 ) {
 }

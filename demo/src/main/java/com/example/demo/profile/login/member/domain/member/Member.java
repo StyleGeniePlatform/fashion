@@ -1,6 +1,7 @@
 package com.example.demo.profile.login.member.domain.member;
 
 import com.example.demo.profile.login.member.exception.exceptions.auth.NotSamePasswordException;
+
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -13,7 +14,7 @@ import lombok.NoArgsConstructor;
 import java.util.Objects;
 
 
-@Entity(name="member")
+@Entity(name = "member")
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 @Getter
 public class Member {
@@ -34,12 +35,24 @@ public class Member {
     @Column(nullable = false)
     private String memberNickName;
 
+    @Column(nullable = false)
+    private String height;
 
-    public Member(final String memberEmail, final String memberName, final String memberPassword, final String memberNickName) {
+    @Column(nullable = false)
+    private String weight;
+
+    @Column(nullable = false)
+    private String shoeSize;
+
+    public Member(final String memberEmail, final String memberName, final String memberPassword, final String memberNickName, final String height, final String weight, final String shoeSize) {
+        this.id = id;
         this.memberEmail = memberEmail;
         this.memberName = memberName;
         this.memberPassword = memberPassword;
         this.memberNickName = memberNickName;
+        this.height = height;
+        this.weight = weight;
+        this.shoeSize = shoeSize;
     }
 
     public void checkPassword(String requestPassword) {

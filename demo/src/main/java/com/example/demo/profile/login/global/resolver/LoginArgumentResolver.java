@@ -1,6 +1,5 @@
 package com.example.demo.profile.login.global.resolver;
 
-
 import com.example.demo.profile.login.global.annotation.Member;
 import com.example.demo.profile.login.global.application.JwtTokenService;
 import com.example.demo.profile.login.global.exception.exceptions.jwt.NotFoundTokenException;

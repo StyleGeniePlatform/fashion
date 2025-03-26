@@ -83,10 +83,11 @@ public class AuthService {
         validateLoginRequestFormat(loginRequest);
         Member member = findMemberByEmail(loginRequest.memberEmail());
         member.checkPassword(loginRequest.memberPassword());
-        String token = jwtTokenProvider.createToken(member.getId());
 
-        return new LoginResponse(token, member.getId(), member.getMemberName(), member.getMemberNickName());
+        String token = jwtTokenProvider.createToken(member.getId());
+        return AuthMapper.toLoginResponse(token, member);
     }
+
 
     private void validateLoginRequestFormat(LoginRequest loginRequest) {
         if (loginRequest == null ||
