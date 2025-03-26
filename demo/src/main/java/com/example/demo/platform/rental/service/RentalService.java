@@ -1,6 +1,6 @@
 package com.example.demo.platform.rental.service;
 
-import com.example.demo.platform.rental.controller.dto.RentalPostDTO;
+import com.example.demo.platform.rental.domain.Negative;
 import com.example.demo.platform.rental.domain.entity.Rental;
 import com.example.demo.platform.rental.domain.repository.RentalRepository;
 import com.example.demo.platform.rental.exception.NotFoundMember;
@@ -19,7 +19,9 @@ public class RentalService {
     private final MemberJpaRepository memberJpaRepository;
 
     public Rental createRentalPost(Long memberId, String title, int price, String content, String imageURL) {
-        foundMember(memberId);
+        findMember(memberId);
+        validateTitle(title);
+        validateContent(content);
         Rental rental = getRental(memberId, title, price, content, imageURL);
         return repository.save(rental);
     }
@@ -33,7 +35,7 @@ public class RentalService {
                 imageURL);
     }
 
-    private void foundMember(final Long memberId) {
+    private void findMember(final Long memberId) {
         Member member = memberJpaRepository
                 .findById(memberId)
                 .orElseThrow(NotFoundMember::new);
@@ -41,5 +43,21 @@ public class RentalService {
 
     public List<Rental> getAllRentals() {
         return repository.findAll();
+    }
+
+    private void validateTitle(String title) {
+        for (Negative negative : Negative.values()) {
+            if (title.contains(negative.getNegativeMessage())) {
+                throw new IllegalArgumentException("제목에 부적절한 언어가 포함되어 있습니다.");
+            }
+        }
+    }
+
+    private void validateContent(String content) {
+        for (Negative negative : Negative.values()) {
+            if (content.contains(negative.getNegativeMessage())) {
+                throw new IllegalArgumentException("내용에 부적절한 언어가 포함되어 있습니다.");
+            }
+        }
     }
 }
