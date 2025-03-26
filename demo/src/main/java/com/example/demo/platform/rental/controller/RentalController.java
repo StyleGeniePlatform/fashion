@@ -1,0 +1,40 @@
+package com.example.demo.platform.rental.controller;
+
+import com.example.demo.platform.rental.controller.dto.RentalPostDTO;
+import com.example.demo.platform.rental.domain.entity.Rental;
+import com.example.demo.platform.rental.service.RentalService;
+import com.example.demo.profile.login.global.annotation.Member;
+
+import lombok.RequiredArgsConstructor;
+
+import org.springframework.http.ResponseEntity;
+
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.RestController;
+
+import java.util.List;
+
+@RestController
+@RequestMapping("/rentals")
+@RequiredArgsConstructor
+public class RentalController {
+
+    private final RentalService rentalService;
+
+    @PostMapping("/post")
+    public ResponseEntity<Rental> createRental(@Member Long memberId,
+                                               @RequestBody RentalPostDTO request) {
+        Rental rental = rentalService.createRentalPost(memberId, request.title(), request.price(), request.content(), request.imageURL());
+        return ResponseEntity.ok(rental);
+    }
+
+    @GetMapping
+    public ResponseEntity<List<Rental>> getAllRentals() {
+        return ResponseEntity.ok(rentalService.getAllRentals());
+    }
+}
+
