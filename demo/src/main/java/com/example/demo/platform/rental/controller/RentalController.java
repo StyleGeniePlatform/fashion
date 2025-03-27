@@ -10,10 +10,10 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.util.List;
@@ -36,5 +36,19 @@ public class RentalController {
     public ResponseEntity<List<Rental>> getAllRentals() {
         return ResponseEntity.ok(rentalService.getAllRentals());
     }
-}
 
+    // 좋아요 증가
+    @PostMapping("/{rentalId}/like")
+    public ResponseEntity<Rental> increaseLike(@Member Long memberId, @PathVariable Long rentalId) {
+        Rental rental = rentalService.increaseLike(memberId, rentalId);
+        return ResponseEntity.ok(rental);
+    }
+
+    // 좋아요 감소
+    @PostMapping("/{rentalId}/dislike")
+    public ResponseEntity<Rental> decreaseLike(@Member Long memberId, @PathVariable Long rentalId) {
+        Rental rental = rentalService.decreaseLike(memberId, rentalId);
+        return ResponseEntity.ok(rental);
+    }
+
+}
