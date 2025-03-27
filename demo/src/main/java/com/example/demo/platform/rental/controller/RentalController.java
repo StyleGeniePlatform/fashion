@@ -1,5 +1,6 @@
 package com.example.demo.platform.rental.controller;
 
+import com.example.demo.platform.rental.controller.dto.RentalDTO;
 import com.example.demo.platform.rental.controller.dto.RentalPostDTO;
 import com.example.demo.platform.rental.domain.entity.Rental;
 import com.example.demo.platform.rental.service.RentalService;
@@ -33,7 +34,7 @@ public class RentalController {
     }
 
     @GetMapping
-    public ResponseEntity<List<Rental>> getAllRentals() {
+    public ResponseEntity<List<RentalDTO>> getAllRentals() {
         return ResponseEntity.ok(rentalService.getAllRentals());
     }
 

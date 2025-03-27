@@ -9,7 +9,7 @@ import jakarta.persistence.Version;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
-@Entity(name = "rent")
+@Entity
 @NoArgsConstructor
 @Getter
 public class Rental {
@@ -34,10 +34,10 @@ public class Rental {
     private String content;
 
     @Column
-    private String imageData; // 변경된 부분
+    private String imageData;
 
     @Column(nullable = false)
-    private int likeCount = 0;  // 기본값 0
+    private int likeCount;
 
     public Rental(final Long memberId, final String title, final int price, final String content, final String imageData) {
         this.memberId = memberId;
@@ -45,19 +45,16 @@ public class Rental {
         this.price = price;
         this.content = content;
         this.imageData = imageData;
-        this.likeCount = 0;  // 기본값 설정
+        this.likeCount = 0;
     }
 
-    // 좋아요 증가 메서드
     public void increaseLike() {
         this.likeCount++;
     }
 
-    // 좋아요 감소 메서드
     public void decreaseLike() {
         if (this.likeCount > 0) {
             this.likeCount--;
         }
     }
-
 }

@@ -1,8 +1,10 @@
 package com.example.demo.platform.rental.service;
 
+import com.example.demo.platform.rental.controller.dto.RentalDTO;
 import com.example.demo.platform.rental.domain.Negative;
 import com.example.demo.platform.rental.domain.entity.Rental;
 import com.example.demo.platform.rental.domain.repository.RentalRepository;
+import com.example.demo.platform.rental.exception.CheckVersion;
 import com.example.demo.platform.rental.exception.NegativeContent;
 import com.example.demo.platform.rental.exception.NegativeTitle;
 import com.example.demo.platform.rental.exception.NotFoundMember;
@@ -15,6 +17,8 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
+import java.util.stream.Collectors;
+
 
 @Service
 @RequiredArgsConstructor
@@ -31,9 +35,19 @@ public class RentalService {
         return repository.save(rental);
     }
 
-    public List<Rental> getAllRentals() {
-        return repository.findAll();
+    public List<RentalDTO> getAllRentals() {
+        List<Rental> rentals = repository.findAll();
+        return rentals.stream()
+                .map(rental -> new RentalDTO(
+                        rental.getTitle(),
+                        rental.getLikeCount(),
+                        rental.getContent(),
+                        rental.getImageData(),
+                        rental.getPrice()
+                ))
+                .collect(Collectors.toList());
     }
+
 
     @Transactional
     public Rental increaseLike(Long memberId, Long rentalId) {
@@ -44,7 +58,7 @@ public class RentalService {
         try {
             return repository.save(rental);
         } catch (OptimisticLockException e) {
-            throw new RuntimeException("버전 충돌 체크 ");
+            throw new CheckVersion();
         }
     }
 
@@ -57,7 +71,7 @@ public class RentalService {
         try {
             return repository.save(rental);  // 저장 시 버전 충돌을 체크
         } catch (OptimisticLockException e) {
-            throw new RuntimeException("버전 충돌 체크 ");
+            throw new CheckVersion();
         }
     }
 
