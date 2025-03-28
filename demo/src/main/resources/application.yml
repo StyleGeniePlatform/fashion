@@ -1,3 +1,20 @@
 jwt:
   secret: secretkeysecretkeysecretkeysecretkeysecretkeysecretkeysecretkeysecretkeysecretkey
   expiration-period: 1800
+
+
+spring:
+  mail:
+    host: smtp.naver.com #smtp 서버 주소
+    port: 465
+    username: tmdduqflfl@naver.com #네이버 아이디
+    password: qkrgksthf12 #네이버 비밀번호
+    properties:
+      mail:
+        smtp:
+          auth: true
+          starttls.enable: true  # TLS 사용 시 true, SSL 사용 시 false
+          ssl.enable: true       # SSL 사용 시 true
+          timeout: 5000
+          connectiontimeout: 5000
+          writetimeout: 5000
