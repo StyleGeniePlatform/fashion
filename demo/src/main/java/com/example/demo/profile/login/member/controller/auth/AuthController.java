@@ -6,6 +6,7 @@ import com.example.demo.profile.login.member.controller.auth.dto.LoginResponse;
 import com.example.demo.profile.login.member.controller.auth.dto.SignUpRequest;
 import com.example.demo.profile.login.member.controller.auth.dto.SignUpResponse;
 
+import com.example.demo.profile.login.member.controller.dto.AuthRequestDTO;
 import com.example.demo.profile.login.member.controller.dto.EmailAuthRequestDto;
 import com.example.demo.profile.login.member.mapper.auth.AuthMapper;
 import com.example.demo.profile.login.member.service.auth.AuthService;
@@ -51,22 +52,25 @@ public class AuthController {
     }
 
     @PostMapping("/send-auth-code")
-    public String mailConfirm(@RequestBody EmailAuthRequestDto emailDto) throws MessagingException, UnsupportedEncodingException {
-        return emailService.sendEmail(emailDto.getEmail());
+    public String sendAuthCode(@RequestBody EmailAuthRequestDto emailDto, HttpSession session) throws MessagingException, UnsupportedEncodingException {
+        return emailService.sendEmail(emailDto.getEmail(), session);
     }
 
-//
-//    @PostMapping("/verify-auth-code")
-//    public String verifyAuthCode(@RequestParam String email, @RequestParam String authCode, HttpSession session) {
-//        boolean isValid = authCodeService.verifyAuthCode(session, email, authCode);
-//        return isValid ? "인증번호가 일치합니다." : "인증번호가 틀립니다.";
-//    }
+    @PostMapping("/verify-auth-code")
+    public ResponseEntity<String> verifyAuthCode(@RequestBody AuthRequestDTO request, HttpSession session) {
+        String storedCode = (String) session.getAttribute(request.getEmail());
+        if (storedCode != null && storedCode.equals(request.getAuthCode())) {
+            session.removeAttribute(request.getEmail());
+            return ResponseEntity.ok("인증 성공!");
+        }
+        return ResponseEntity.badRequest().body("인증번호가 틀립니다.");
+    }
+
 
     // EmailRequest 클래스
     @Getter
     public static class EmailRequest {
         private String email;
-
         public void setEmail(String email) {
             this.email = email;
         }
