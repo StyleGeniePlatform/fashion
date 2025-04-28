@@ -22,12 +22,12 @@ public class EmailService {
     private final SpringTemplateEngine templateEngine;
 
     public String sendEmail(String toEmail, HttpSession session) throws MessagingException, UnsupportedEncodingException {
-        String authNum = createCode(); // 인증 코드 생성
-        session.setAttribute(toEmail, authNum); // 세션에 저장
+        String authNum = createCode();
+        session.setAttribute(toEmail, authNum);
 
         MimeMessage emailForm = createEmailForm(toEmail, authNum);
         emailSender.send(emailForm);
-        return authNum; // 프론트엔드에서 테스트 용도로 반환
+        return authNum;
     }
 
     private String createCode() {
